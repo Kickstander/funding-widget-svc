@@ -1,13 +1,13 @@
-# Project Name
+# Kickstand
 
-> Project description
+> A detail page for a crowd-funding campaign
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/FEC-Kickstand/comments-module
+  - https://github.com/FEC-Kickstand/support-module-svc
+  - https://github.com/FEC-Kickstand/updates-service
+  - https://github.com/FEC-Kickstand/funding-widget
 
 ## Table of Contents
 
