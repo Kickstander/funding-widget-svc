@@ -8,15 +8,27 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   module: {
-    loaders: [
-      {
-        test: /\.jsx?/,
-        include: path.resolve(__dirname, 'client/src/'),
+  rules: [
+    {
+      test: /\.m?js$/,
+      exclude: /node_modules/,
+      use: {
         loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
+        options: {
+          presets: ['@babel/preset-env', '@babel/preset-react']
         }
       }
-    ]
-  }
+    },
+    {
+      test: /\.m?jsx$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env', '@babel/preset-react']
+        }
+      }
+    }
+  ]
+}
 };
