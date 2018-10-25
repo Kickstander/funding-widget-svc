@@ -11,9 +11,7 @@
     "build": "npx webpack -w"
   },
   "dependencies": {
-    "express": "^4.15.4",
     "jquery": "^3.2.1",
-    "mongoose": "^4.11.6",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   },
