@@ -10,9 +10,9 @@ const queryString3 = 'CREATE TABLE IF NOT EXISTS campaigns (id INT NOT NULL AUTO
 const queryString4 = 'TRUNCATE campaigns;';
 const queryString5 = 'LOAD DATA INFILE \'/var/lib/mysql-files/seedData.txt\' INTO TABLE campaigns COLUMNS TERMINATED BY \'\,\' OPTIONALLY ENCLOSED BY \'"\' (pledged, goal, backers, media, category, city, state, currency, country, deadline);';
 
-var fakeRows = '';
-var currCodes = ['USD', 'GBP', 'CAD', 'AUD', 'NZD', 'EUR', 'DKK', 'NOK', 'SEK', 'CHF', 'HKD', 'SGD', 'MXN', 'JPY'];
-var countries = ['United States', 'United Kingdom', 'Canada', 'Australia', 'New Zealand', 'Netherlands', 'Denmark', 'Ireland', 'Norway', 'Sweden', 'Germany', 'France', 'Spain', 'Italy', 'Austria', 'Belgium', 'Switzerland', 'Luxembourg', 'Hong Kong', 'Singapore', 'Mexico', 'Japan'];
+let fakeRows = '';
+const currCodes = ['USD', 'GBP', 'CAD', 'AUD', 'NZD', 'EUR', 'DKK', 'NOK', 'SEK', 'CHF', 'HKD', 'SGD', 'MXN', 'JPY'];
+const countries = ['United States', 'United Kingdom', 'Canada', 'Australia', 'New Zealand', 'Netherlands', 'Denmark', 'Ireland', 'Norway', 'Sweden', 'Germany', 'France', 'Spain', 'Italy', 'Austria', 'Belgium', 'Switzerland', 'Luxembourg', 'Hong Kong', 'Singapore', 'Mexico', 'Japan'];
 
 const dateGen = () => {
   return moment(faker.date.future()).format('YYYY-MM-DD');
@@ -40,7 +40,6 @@ db.connect((error) => {
     console.log(error);
     return;
   }
-  console.log(`Connection established`);
 });
 
 db.query(queryString1 + queryString2 + queryString3 + queryString4 + queryString5);
