@@ -9,8 +9,7 @@
   },
   "scripts": {
     "build": "npx webpack -w",
-    "server-dev": "nodemon server/server.js",
-    "seed": "node db/seed.js"
+    "server-dev": "nodemon server/server.js"
   },
   "dependencies": {
     "express": "^4.16.4",
