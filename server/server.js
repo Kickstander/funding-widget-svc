@@ -16,6 +16,10 @@ app.get('/campaigns/:campaignId/stats', (req, res) => { // handle requests for a
   let campaign = parseInt(req.params.campaignId); // parse out the campaign's unique id
 
   db.query(statsQuery, [campaign], (error, results) => { // retrieve campaign stats from the database
+    if (error) {
+      console.log(error);
+      return;
+    }
     res.status(200).send(results[1][0]);
   });
 });
