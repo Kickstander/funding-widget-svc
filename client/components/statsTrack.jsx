@@ -2,10 +2,9 @@ import React from 'react';
 import Promise from 'bluebird';
 import $ from 'jquery';
 
-
-class statsTrack extends React.Component {
-  constructor() {
-    super();
+class StatsTrack extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
       pledged: 0,
       goal: 0,
@@ -33,7 +32,7 @@ class statsTrack extends React.Component {
         deadline: stats.deadline,
       });
     }).catch((err) => {
-      console.log(err);
+      throw err;
     });
   }
 
@@ -42,6 +41,7 @@ class statsTrack extends React.Component {
     const { goal } = this.state;
     const { backers } = this.state;
     const { deadline } = this.state;
+
     console.log(`${pledged} ${goal} ${backers} ${deadline}`);
     return (
       <div className="funding-tracker">
@@ -62,4 +62,4 @@ class statsTrack extends React.Component {
   }
 }
 
-export default statsTrack;
+export default StatsTrack;
