@@ -1,8 +1,7 @@
-const mysql = require('mysql');
 const fs = require('fs');
 const faker = require('faker');
-const db = require('./connection.js');
 const moment = require('moment');
+const db = require('./connection.js');
 // a series of query strings to send the database
 const createDatabase = 'CREATE DATABASE IF NOT EXISTS funding_stats;';
 const useDatabase = 'USE funding_stats;';
@@ -19,22 +18,20 @@ const createTable = `CREATE TABLE IF NOT EXISTS campaigns (id INT NOT NULL AUTO_
                      country VARCHAR(40));`;
 
 const clearTable = 'TRUNCATE campaigns;';
-const writeData = `LOAD DATA INFILE \'/var/lib/mysql-files/seedData.txt\' INTO TABLE campaigns
-                   COLUMNS TERMINATED BY \'\,\' OPTIONALLY ENCLOSED BY \'"\'
+const writeData = `LOAD DATA INFILE '/var/lib/mysql-files/seedData.txt' INTO TABLE campaigns
+                   COLUMNS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
                    (pledged, goal, backers, media, category, city, state, currency, country, deadline);`;
 
 let fakeRows = ''; // a variable to contain my comma-separated data
 const currCodes = ['USD', 'GBP', 'CAD', 'AUD', 'NZD', 'EUR', 'DKK',
-                   'NOK', 'SEK', 'CHF', 'HKD', 'SGD', 'MXN', 'JPY']; // the currency codes accepted by Kickstand
+  'NOK', 'SEK', 'CHF', 'HKD', 'SGD', 'MXN', 'JPY']; // the currency codes accepted by Kickstand
 
 const countries = ['United States', 'United Kingdom', 'Canada', 'Australia', 'New Zealand',
-                   'Netherlands', 'Denmark', 'Ireland', 'Norway', 'Sweden', 'Germany',
-                   'France', 'Spain', 'Italy', 'Austria', 'Belgium', 'Switzerland', 'Luxembourg',
-                   'Hong Kong', 'Singapore', 'Mexico', 'Japan']; // the accepted countries of origin for campaigns
+  'Netherlands', 'Denmark', 'Ireland', 'Norway', 'Sweden', 'Germany',
+  'France', 'Spain', 'Italy', 'Austria', 'Belgium', 'Switzerland', 'Luxembourg',
+  'Hong Kong', 'Singapore', 'Mexico', 'Japan']; // the accepted countries of origin for campaigns
 
-const dateGen = () => { // helper function to generate a random date on the appropriate format
-  return moment(faker.date.future()).format('YYYY-MM-DD');
-}
+const dateGen = () => moment(faker.date.future()).format('YYYY-MM-DD');
 
 for (let i = 0; i < 100; i++) {
   // assemble random comma-separated data strings
@@ -51,15 +48,15 @@ for (let i = 0; i < 100; i++) {
 
 fs.writeFile('/var/lib/mysql-files/seedData.csv', fakeRows, (err) => { // write CSV
   if (err) {
+    // eslint-disable-next-line no-console
     console.log(err);
-    return;
   }
 });
 
 db.connect((error) => {
   if (error) {
+    // eslint-disable-next-line no-console
     console.log(error);
-    return;
   }
 });
 
