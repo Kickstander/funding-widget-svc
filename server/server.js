@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/campaigns/:campaignId/stats', (req, res) => { // handle requests for a given campaign's stats
   const campaign = parseInt(req.params.campaignId, 10); // parse out the campaign's unique id
-
+  console.log('Request received');
   db.query(statsQuery, [campaign], (error, results) => { // retrieve stats from the database
     if (error) {
       // eslint-disable-next-line no-console
