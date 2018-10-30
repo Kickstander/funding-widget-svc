@@ -23,7 +23,8 @@
     "mysql": "^2.16.0",
     "nodemon": "^1.18.4",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
