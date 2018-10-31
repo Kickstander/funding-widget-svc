@@ -1,6 +1,7 @@
 import React from 'react';
 import Promise from 'bluebird';
 import $ from 'jquery';
+import Moment from 'moment';
 
 class StatsTrack extends React.Component {
   constructor(props) {
@@ -15,21 +16,19 @@ class StatsTrack extends React.Component {
 
   componentDidMount() {
     const campaignId = 1 + Math.floor(Math.random() * 100);
-    console.log(campaignId);
     const promise = new Promise((resolve) => {
       $.get(`campaigns/${campaignId}/stats`, (data) => {
-        console.log(`Ajax result: ${data}`);
         resolve(data);
       });
     });
 
     promise.then((stats) => {
-      console.log(stats);
       this.setState({
         pledged: stats.pledged,
         goal: stats.goal,
         backers: stats.backers,
         deadline: stats.deadline,
+        currCode: stats.currency,
       });
     }).catch((err) => {
       throw err;
@@ -38,24 +37,29 @@ class StatsTrack extends React.Component {
 
   render() {
     const { pledged } = this.state;
+    const { currCode } = this.state;
     const { goal } = this.state;
     const { backers } = this.state;
     const { deadline } = this.state;
+    const pledgeAmount = pledged.toLocaleString(undefined, { style: 'currency', currency: currCode, currencyDisplay: 'symbol' });
+    const goalAmount = goal.toLocaleString(undefined, { style: 'currency', currency: currCode });
+    const timeLeft = Moment(deadline).diff(Moment(), 'days');
+    const goalLine = `Pledged of ${goalAmount} goal`;
+    const backerLine = `${backers} Backers`;
 
-    console.log(`${pledged} ${goal} ${backers} ${deadline}`);
+
     return (
       <div className="funding-tracker">
         <div className="pledged-amount">
-          Pledge Amount {pledged}
+          <h3>{pledgeAmount}</h3>
         </div>
         <div className="goal-amount">
-          Intended Goal {goal}
+          <p>{goalLine}</p>
         </div>
-        <div className="backers">
-          Backers {backers}
-        </div>
+        <div className="backers">{backerLine}</div>
         <div className="deadline">
-          Deadline {deadline}
+          <h3>{timeLeft}</h3>
+          <p>days to go</p>
         </div>
       </div>
     );
