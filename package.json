@@ -10,7 +10,8 @@
   "scripts": {
     "build": "npx webpack -w",
     "server-dev": "nodemon server/server.js",
-    "seed": "node db/seed.js"
+    "seed": "node db/seed.js",
+    "test": "npx jest"
   },
   "dependencies": {
     "acorn": "^6.0.2",
