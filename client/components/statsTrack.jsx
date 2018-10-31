@@ -52,9 +52,11 @@ class StatsTrack extends React.Component {
     const goalAmount = goal.toLocaleString(undefined, { style: 'currency', currency: currCode });
     const goalLine = `Pledged of ${goalAmount} goal`;
     let timeLeft = Moment(deadline).diff(Moment(), 'days');
+    let timeUnits = 'days to go';
 
     if (timeLeft <= 0) {
       timeLeft = Moment(deadline).diff(Moment(), 'hours', true);
+      timeUnits = 'hours to go';
     }
 
 
@@ -71,8 +73,8 @@ class StatsTrack extends React.Component {
           <p>backers</p>
         </div>
         <div className="deadline">
-          <h3>{timeLeft}</h3>
-          <p>days to go</p>
+          <h3 id="remaining">{timeLeft}</h3>
+          <p id="units">{timeUnits}</p>
         </div>
         <button type="button">Back this Campaign</button>
       </div>
