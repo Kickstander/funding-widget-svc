@@ -13,9 +13,14 @@ class StatsTrack extends React.Component {
       deadline: '',
       currCode: 'USD',
     };
+    this.loadCampaignStats = this.loadCampaignStats.bind(this);
   }
 
   componentDidMount() {
+    this.loadCampaignStats();
+  }
+
+  loadCampaignStats() {
     const campaignId = 1 + Math.floor(Math.random() * 100);
     const promise = new Promise((resolve) => {
       $.get(`campaigns/${campaignId}/stats`, (data) => {
