@@ -42,10 +42,15 @@ class StatsTrack extends React.Component {
     const { goal } = this.state;
     const { backers } = this.state;
     const { deadline } = this.state;
+
     const pledgeAmount = pledged.toLocaleString(undefined, { style: 'currency', currency: currCode });
     const goalAmount = goal.toLocaleString(undefined, { style: 'currency', currency: currCode });
-    const timeLeft = Moment(deadline).diff(Moment(), 'days');
     const goalLine = `Pledged of ${goalAmount} goal`;
+    let timeLeft = Moment(deadline).diff(Moment(), 'days');
+
+    if (timeLeft <= 0) {
+      timeLeft = Moment(deadline).diff(Moment(), 'hours', true);
+    }
 
 
     return (
