@@ -20,8 +20,6 @@ app.get('/campaigns/:campaignId/stats', (req, res) => { // handle requests for a
       console.log(error);
       return;
     }
-    // eslint-disable-next-line no-console
-    console.log(results[1][0]);
     res.status(200).send(results[1][0]);
   });
 });
