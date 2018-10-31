@@ -40,22 +40,22 @@ class StatsTrack extends React.Component {
       throw err;
     });
   }
-
   render() {
     const { pledged } = this.state;
     const { currCode } = this.state;
     const { goal } = this.state;
-    const { backers } = this.state;
     const { deadline } = this.state;
+    const { backers } = this.state;
 
     const pledgeAmount = pledged.toLocaleString(undefined, { style: 'currency', currency: currCode });
     const goalAmount = goal.toLocaleString(undefined, { style: 'currency', currency: currCode });
     const goalLine = `Pledged of ${goalAmount} goal`;
-    let timeLeft = Moment(deadline).diff(Moment(), 'days');
+    const backerCount = backers.toLocaleString(undefined);
+    let timeLeft = Moment(deadline).diff(Moment(), 'days').toLocaleString(undefined);
     let timeUnits = 'days to go';
 
     if (timeLeft <= 0) {
-      timeLeft = Moment(deadline).diff(Moment(), 'hours', true);
+      timeLeft = Moment(deadline).diff(Moment(), 'hours', true).toLocaleString(undefined);
       timeUnits = 'hours to go';
     }
 
@@ -69,7 +69,7 @@ class StatsTrack extends React.Component {
           <p>{goalLine}</p>
         </div>
         <div className="backers">
-          <h3>{backers}</h3>
+          <h3>{backerCount}</h3>
           <p>backers</p>
         </div>
         <div className="deadline">

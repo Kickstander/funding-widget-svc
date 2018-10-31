@@ -1,6 +1,6 @@
-import express from 'express';
-import path from 'path';
-import db from '../db/connection';
+const path = require('path');
+const express = require('express');
+const db = require('../db/connection');
 
 const statsQuery = `USE funding_stats; SELECT pledged, goal, currency, backers, 
                     deadline, category, city, state, country FROM campaigns WHERE id = ?;`;
