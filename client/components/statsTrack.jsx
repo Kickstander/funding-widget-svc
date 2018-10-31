@@ -11,6 +11,7 @@ class StatsTrack extends React.Component {
       goal: 0,
       backers: 0,
       deadline: '',
+      currCode: 'USD',
     };
   }
 
@@ -41,11 +42,10 @@ class StatsTrack extends React.Component {
     const { goal } = this.state;
     const { backers } = this.state;
     const { deadline } = this.state;
-    const pledgeAmount = pledged.toLocaleString(undefined, { style: 'currency', currency: currCode, currencyDisplay: 'symbol' });
+    const pledgeAmount = pledged.toLocaleString(undefined, { style: 'currency', currency: currCode });
     const goalAmount = goal.toLocaleString(undefined, { style: 'currency', currency: currCode });
     const timeLeft = Moment(deadline).diff(Moment(), 'days');
     const goalLine = `Pledged of ${goalAmount} goal`;
-    const backerLine = `${backers} Backers`;
 
 
     return (
@@ -56,11 +56,15 @@ class StatsTrack extends React.Component {
         <div className="goal-amount">
           <p>{goalLine}</p>
         </div>
-        <div className="backers">{backerLine}</div>
+        <div className="backers">
+          <h3>{backers}</h3>
+          <p>backers</p>
+        </div>
         <div className="deadline">
           <h3>{timeLeft}</h3>
           <p>days to go</p>
         </div>
+        <button type="button">Back this Campaign</button>
       </div>
     );
   }
