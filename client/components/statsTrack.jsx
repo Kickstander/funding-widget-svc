@@ -40,6 +40,7 @@ class StatsTrack extends React.Component {
       throw err;
     });
   }
+
   render() {
     const { pledged } = this.state;
     const { currCode } = this.state;
@@ -51,7 +52,7 @@ class StatsTrack extends React.Component {
     const goalAmount = goal.toLocaleString(undefined, { style: 'currency', currency: currCode });
     const goalLine = `Pledged of ${goalAmount} goal`;
     const backerCount = backers.toLocaleString(undefined);
-    let timeLeft = Moment(deadline).diff(Moment(), 'days').toLocaleString(undefined);
+    let timeLeft = Moment(deadline).diff(Moment(), 'days');
     let timeUnits = 'days to go';
 
     if (timeLeft <= 0) {
