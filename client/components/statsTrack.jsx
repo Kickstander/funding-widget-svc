@@ -67,15 +67,15 @@ class StatsTrack extends React.Component {
           <h3>{pledgeAmount}</h3>
         </div>
         <div className="goal-amount">
-          <p>{goalLine}</p>
+          <div>{goalLine}</div>
         </div>
         <div className="backers">
           <h3>{backerCount}</h3>
-          <p>backers</p>
+          <div>backers</div>
         </div>
         <div className="deadline">
           <h3 id="remaining">{timeLeft}</h3>
-          <p id="units">{timeUnits}</p>
+          <div id="units">{timeUnits}</div>
         </div>
         <button type="button">Back this Campaign</button>
       </div>
