@@ -45,9 +45,13 @@ class StatsTrack extends React.Component {
   }
 
   clickHandler() {
-    const newPledge = 1 + Math.floor(Math.Random() * 50);
+    const newPledge = 1 + Math.floor(Math.random() * 50);
     const { pledged } = this.state;
-    this.setState({ pledged: (pledged + newPledge) });
+    const { backers } = this.state;
+    this.setState({
+      pledged: (pledged + newPledge),
+      backers: (backers + 1),
+    });
   }
 
   render() {
