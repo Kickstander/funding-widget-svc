@@ -10,7 +10,11 @@
   "scripts": {
     "build": "npx webpack -w",
     "server-dev": "nodemon server/server.js",
-    "seed": "node db/seed.js"
+    "seed": "node db/seed.js",
+    "test": "jest"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>enzyme.config.js"
   },
   "dependencies": {
     "acorn": "^6.0.2",
