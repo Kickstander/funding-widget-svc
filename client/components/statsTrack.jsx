@@ -2,6 +2,7 @@ import React from 'react';
 import Promise from 'bluebird';
 import $ from 'jquery';
 import Moment from 'moment';
+import BackButton from './BackButton';
 
 class StatsTrack extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class StatsTrack extends React.Component {
       currCode: 'USD',
     };
     this.loadCampaignStats = this.loadCampaignStats.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
   }
 
   componentDidMount() {
@@ -21,14 +23,15 @@ class StatsTrack extends React.Component {
   }
 
   loadCampaignStats() {
-    const campaignId = 1 + Math.floor(Math.random() * 100);
+    const campaignId = 1 + Math.floor(Math.random() * 100); // random id 1-100
     const promise = new Promise((resolve) => {
+      // ask the server to retrieve campaign data from db
       $.get(`campaigns/${campaignId}/stats`, (data) => {
         resolve(data);
       });
     });
 
-    promise.then((stats) => {
+    promise.then((stats) => { // update component state with db data
       this.setState({
         pledged: stats.pledged,
         goal: stats.goal,
@@ -41,6 +44,12 @@ class StatsTrack extends React.Component {
     });
   }
 
+  clickHandler() {
+    const newPledge = 1 + Math.floor(Math.Random() * 50);
+    const { pledged } = this.state;
+    this.setState({ pledged: (pledged + newPledge) });
+  }
+
   render() {
     const { pledged } = this.state;
     const { currCode } = this.state;
@@ -48,14 +57,19 @@ class StatsTrack extends React.Component {
     const { deadline } = this.state;
     const { backers } = this.state;
 
+    // format funds as browser locale string with currency symbol/code
     const pledgeAmount = pledged.toLocaleString(undefined, { style: 'currency', currency: currCode });
+    // format goal as browser locale string with currency symbol/code
     const goalAmount = goal.toLocaleString(undefined, { style: 'currency', currency: currCode });
+    // render text string for amount raised
     const goalLine = `Pledged of ${goalAmount} goal`;
+    // format backers numbers according to browser locale
     const backerCount = backers.toLocaleString(undefined);
+    // calculate remaining funding time
     let timeLeft = Moment(deadline).diff(Moment(), 'days');
     let timeUnits = 'days to go';
 
-    if (timeLeft <= 0) {
+    if (timeLeft <= 0) { // reformat remaining time if less than one day
       timeLeft = Moment(deadline).diff(Moment(), 'hours', true).toLocaleString(undefined);
       timeUnits = 'hours to go';
     }
@@ -77,7 +91,7 @@ class StatsTrack extends React.Component {
           <h3 id="remaining">{timeLeft}</h3>
           <div id="units">{timeUnits}</div>
         </div>
-        <button type="button">Back this Campaign</button>
+        <BackButton clickToBack={clickHandler} />
       </div>
     );
   }
