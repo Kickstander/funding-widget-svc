@@ -44,7 +44,7 @@ class StatsTrack extends React.Component {
     });
   }
 
-  clickHandler() {
+  clickHandler() { // increase pledged total and increment backer count
     const newPledge = 1 + Math.floor(Math.random() * 50);
     const { pledged } = this.state;
     const { backers } = this.state;
