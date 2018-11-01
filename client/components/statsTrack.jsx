@@ -3,6 +3,7 @@ import Promise from 'bluebird';
 import $ from 'jquery';
 import Moment from 'moment';
 import BackButton from './BackButton';
+import style from '../style.css';
 
 class StatsTrack extends React.Component {
   constructor(props) {
@@ -80,20 +81,20 @@ class StatsTrack extends React.Component {
 
 
     return (
-      <div className="funding-tracker">
-        <div className="pledged-amount">
+      <div className={style.fundingTracker}>
+        <div className={style.pledgedAmount}>
           <h3>{pledgeAmount}</h3>
         </div>
-        <div className="goal-amount">
+        <div className={style.goalAmount}>
           <div>{goalLine}</div>
         </div>
-        <div className="backers">
+        <div className={style.backers}>
           <h3>{backerCount}</h3>
           <div>backers</div>
         </div>
-        <div className="deadline">
-          <h3 id="remaining">{timeLeft}</h3>
-          <div id="units">{timeUnits}</div>
+        <div className={style.deadline}>
+          <h3 className={style.remaining}>{timeLeft}</h3>
+          <div className={style.units}>{timeUnits}</div>
         </div>
         <BackButton clickToBack={this.clickHandler} />
       </div>
