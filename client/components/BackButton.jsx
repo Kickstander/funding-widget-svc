@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import style from '../style.css';
 
 const BackButton = (props) => {
   const { clickToBack } = props;
 
-  return <button type="button" onClick={clickToBack}>Back this Campaign</button>;
+  return <a className={style.backingButton} href="#" onClick={clickToBack}>Back this Campaign</a>;
 };
 
 BackButton.propTypes = {
