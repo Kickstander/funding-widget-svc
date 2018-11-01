@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const BackButton = (props) => {
-  const { clickHandler } = props;
+  const { clickToBack } = props;
 
-  return <button type="button" onClick={clickHandler}>Back this Campaign</button>;
+  return <button type="button" onClick={clickToBack}>Back this Campaign</button>;
 };
 
 BackButton.propTypes = {
-  clickHandler: PropTypes.func.isRequired,
+  clickToBack: PropTypes.func.isRequired,
 };
 
 export default BackButton;

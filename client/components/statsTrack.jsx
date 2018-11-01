@@ -91,7 +91,7 @@ class StatsTrack extends React.Component {
           <h3 id="remaining">{timeLeft}</h3>
           <div id="units">{timeUnits}</div>
         </div>
-        <BackButton clickToBack={clickHandler} />
+        <BackButton clickToBack={this.clickHandler} />
       </div>
     );
   }
