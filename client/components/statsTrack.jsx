@@ -3,6 +3,7 @@ import Promise from 'bluebird';
 import $ from 'jquery';
 import Moment from 'moment';
 import BackButton from './BackButton';
+import style from '../style.css';
 
 class StatsTrack extends React.Component {
   constructor(props) {
@@ -66,7 +67,7 @@ class StatsTrack extends React.Component {
     // format goal as browser locale string with currency symbol/code
     const goalAmount = goal.toLocaleString(undefined, { style: 'currency', currency: currCode });
     // render text string for amount raised
-    const goalLine = `Pledged of ${goalAmount} goal`;
+    const goalLine = `pledged of ${goalAmount} goal`;
     // format backers numbers according to browser locale
     const backerCount = backers.toLocaleString(undefined);
     // calculate remaining funding time
@@ -80,20 +81,20 @@ class StatsTrack extends React.Component {
 
 
     return (
-      <div className="funding-tracker">
-        <div className="pledged-amount">
-          <h3>{pledgeAmount}</h3>
+      <div className={style.fundingTracker}>
+        <div className={style.pledgedAmount}>
+          <h2>{pledgeAmount}</h2>
         </div>
-        <div className="goal-amount">
+        <div className={style.goalAmount}>
           <div>{goalLine}</div>
         </div>
-        <div className="backers">
-          <h3>{backerCount}</h3>
-          <div>backers</div>
+        <div className={style.backerCount}>
+          <h2>{backerCount}</h2>
+          <div className={style.backers}>backers</div>
         </div>
-        <div className="deadline">
-          <h3 id="remaining">{timeLeft}</h3>
-          <div id="units">{timeUnits}</div>
+        <div className={style.deadline}>
+          <h2 className={style.remaining}>{timeLeft}</h2>
+          <div className={style.units}>{timeUnits}</div>
         </div>
         <BackButton clickToBack={this.clickHandler} />
       </div>
