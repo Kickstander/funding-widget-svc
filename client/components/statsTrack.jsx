@@ -83,17 +83,17 @@ class StatsTrack extends React.Component {
     return (
       <div className={style.fundingTracker}>
         <div className={style.pledgedAmount}>
-          <h3>{pledgeAmount}</h3>
+          <h2>{pledgeAmount}</h2>
         </div>
         <div className={style.goalAmount}>
           <div>{goalLine}</div>
         </div>
-        <div className={style.backers}>
-          <h3>{backerCount}</h3>
-          <div>backers</div>
+        <div className={style.backerCount}>
+          <h2>{backerCount}</h2>
+          <div className={style.backers}>backers</div>
         </div>
         <div className={style.deadline}>
-          <h3 className={style.remaining}>{timeLeft}</h3>
+          <h2 className={style.remaining}>{timeLeft}</h2>
           <div className={style.units}>{timeUnits}</div>
         </div>
         <BackButton clickToBack={this.clickHandler} />

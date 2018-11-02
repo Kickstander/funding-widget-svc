@@ -11,15 +11,26 @@ mark, audio, video {
   border: 0;
 }
 
+.app {
+  width: 400px;
+}
+
 .fundingTracker {
   background-color: #FBFBFA;
   display: flex;
   flex-direction: column;
 }
 
+.subtext {
+  color: #656969;
+  font-size: 13px;
+}
+
 .backingButton {
   background-color: #009E74;
   color: #FFF;
+  height: 57px;
+  font-size: 16px;
 }
 
 .pledgedAmount {
@@ -27,10 +38,14 @@ mark, audio, video {
 }
 
 .goalAmount{
-  color: #656969;
+  composes: subtext;
 }
 
 .backers {
+  composes: subtext;
+}
+
+.backerCount {
   color: #000;
 }
 
@@ -43,5 +58,5 @@ mark, audio, video {
 }
 
 .units {
-  color: #656969;
+  composes: subtext;
 }

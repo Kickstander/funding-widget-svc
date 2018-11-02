@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import StatsTrack from './components/statsTrack';
+import style from './style.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={style.app}>
         <StatsTrack />
       </div>
     );
