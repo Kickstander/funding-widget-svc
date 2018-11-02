@@ -1,10 +1,25 @@
-.backingButton {
-  background-color: #009E74;
-  color: #FFF;
+html, body, div, span, applet, object, iframe, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code, del, dfn, div, em, h1, h2,
+h3, h4, h5, img, ins, kbd, q, s, samp, small, strike, strong, sub,
+sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form,
+label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, figure, figcaption, footer,
+header, hgroup, menu, nav, output, ruby, section, summary, time,
+mark, audio, video {
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
 
 .fundingTracker {
   background-color: #FBFBFA;
+  display: flex;
+  flex-direction: column;
+}
+
+.backingButton {
+  background-color: #009E74;
+  color: #FFF;
 }
 
 .pledgedAmount {
