@@ -67,7 +67,7 @@ class StatsTrack extends React.Component {
     // format goal as browser locale string with currency symbol/code
     const goalAmount = goal.toLocaleString(undefined, { style: 'currency', currency: currCode });
     // render text string for amount raised
-    const goalLine = `Pledged of ${goalAmount} goal`;
+    const goalLine = `pledged of ${goalAmount} goal`;
     // format backers numbers according to browser locale
     const backerCount = backers.toLocaleString(undefined);
     // calculate remaining funding time
