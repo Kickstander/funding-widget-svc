@@ -85,6 +85,10 @@ table {
   width: 90%;
 }
 
+.backingButton:hover {
+  background-color: #027C62
+}
+
 .pledgedAmount {
   composes: supertext;
   color: #009E74;
