@@ -3,6 +3,7 @@ import Promise from 'bluebird';
 import $ from 'jquery';
 import Moment from 'moment';
 import BackButton from './BackButton';
+import ProgressBar from './ProgressBar';
 import style from '../style.css';
 
 class StatsTrack extends React.Component {
@@ -82,6 +83,7 @@ class StatsTrack extends React.Component {
 
     return (
       <div className={style.fundingTracker}>
+        <ProgressBar fill={pledged} goal={goal} />
         <div className={style.pledgedAmount}>
           <h2>{pledgeAmount}</h2>
         </div>
