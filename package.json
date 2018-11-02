@@ -14,7 +14,10 @@
     "test": "jest"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>enzyme.config.js"
+    "setupTestFrameworkScriptFile": "<rootDir>enzyme.config.js",
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
   },
   "dependencies": {
     "acorn": "^6.0.2",
@@ -48,6 +51,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^23.6.0",
     "react-test-renderer": "^15.6.2",
     "regenerator-runtime": "^0.12.1",
