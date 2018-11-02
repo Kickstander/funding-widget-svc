@@ -15,8 +15,7 @@ app.get('/campaigns/:campaignId/stats', (req, res) => { // handle requests for a
   const campaign = parseInt(req.params.campaignId, 10); // parse out the campaign's unique id
   db.query(statsQuery, [campaign], (error, results) => { // retrieve stats from the database
     if (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
+      res.status(404).send(error);
       return;
     }
     res.status(200).send(results[1][0]);
