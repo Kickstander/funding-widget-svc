@@ -5,7 +5,9 @@ import StatsTrack from '../client/components/statsTrack';
 import ProgressBar from '../client/components/ProgressBar';
 
 it('renders correctly', () => {
-  const tree = renderer.create(<ProgressBar fill="32" goal="64" />).toJSON();
+  // const mockFill = 32;
+  // const mockGoal = 64;
+  const tree = renderer.create(<ProgressBar fill={32} goal={64} />).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
