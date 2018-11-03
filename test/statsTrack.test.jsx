@@ -1,6 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
 import StatsTrack from '../client/components/statsTrack';
+import ProgressBar from '../client/components/ProgressBar';
+
+it('renders correctly', () => {
+  const tree = renderer.create(<ProgressBar fill="32" goal="64" />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
 
 describe('Time remaining on campaign', () => {
   test('Remaining time is read out in days if 1 or more days are left', () => {
