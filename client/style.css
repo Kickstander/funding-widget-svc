@@ -73,7 +73,7 @@ table {
 }
 
 .progressBar::-webkit-progress-value {
-  color: #027462;
+  background-color: #027462;
 }
 
 .supertext {
@@ -89,6 +89,7 @@ table {
 
 .backingButton {
   background-color: #009E74;
+  border: 0;
   color: #FFF;
   height: 50px;
   font-size: 16px;
