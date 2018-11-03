@@ -8,7 +8,7 @@ h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
+b, u, i, center, progress,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
   line-height: 1;
+  box-sizing: border-box;
 }
 ol, ul {
   list-style: none;
@@ -61,7 +62,18 @@ table {
 }
 
 .progressBar {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  width: 90%;
+  margin-bottom: 15px;
+}
+.progressBar::-webkit-progress-bar {
   background-color: #E9E9E9;
+}
+
+.progressBar::-webkit-progress-value {
+  color: #027462;
 }
 
 .supertext {
@@ -82,6 +94,10 @@ table {
   font-size: 16px;
   margin: 20px 0;
   width: 90%;
+}
+
+.backingButton:hover {
+  background-color: #027C62
 }
 
 .pledgedAmount {
