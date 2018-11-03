@@ -1,7 +1,10 @@
 const fs = require('fs');
 const faker = require('faker');
+const Path = require('path');
 const moment = require('moment');
 const db = require('./connection.js');
+
+const filePath = Path.resolve(__dirname, './seedData.csv');
 // a series of query strings to send the database
 const createDatabase = 'CREATE DATABASE IF NOT EXISTS funding_stats;';
 const useDatabase = 'USE funding_stats;';
@@ -18,7 +21,7 @@ const createTable = `CREATE TABLE IF NOT EXISTS campaigns (id INT NOT NULL AUTO_
                      deadline VARCHAR(50));`;
 
 const clearTable = 'TRUNCATE campaigns;';
-const writeData = `LOAD DATA INFILE '/var/lib/mysql-files/seedData.txt' INTO TABLE campaigns
+const writeData = `LOAD DATA LOCAL INFILE ${filePath} INTO TABLE campaigns
                    COLUMNS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
                    (pledged, goal, backers, media, category, city, state, currency, country, deadline);`;
 
@@ -46,7 +49,7 @@ for (let i = 0; i < 100; i++) {
   fakeRows += '\n'; // terminate each line with a newline
 }
 
-fs.writeFile('/var/lib/mysql-files/seedData.txt', fakeRows, (err) => { // write CSV
+fs.writeFile(filePath, fakeRows, (err) => { // write CSV
   if (err) {
     // eslint-disable-next-line no-console
     console.log(err);
