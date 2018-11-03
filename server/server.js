@@ -7,7 +7,7 @@ const statsQuery = `USE funding_stats; SELECT pledged, goal, currency, backers,
 const port = 3002;
 const app = express();
 
-app.use(express.static(path.resolve(__dirname, '../../funding-widget/public')));
+app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

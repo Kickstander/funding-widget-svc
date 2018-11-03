@@ -1,7 +1,10 @@
 const fs = require('fs');
 const faker = require('faker');
+const Path = require('path');
 const moment = require('moment');
 const db = require('./connection.js');
+
+const filePath = Path.resolve(__dirname, './seedData.csv');
 // a series of query strings to send the database
 const createDatabase = 'CREATE DATABASE IF NOT EXISTS funding_stats;';
 const useDatabase = 'USE funding_stats;';
@@ -18,7 +21,7 @@ const createTable = `CREATE TABLE IF NOT EXISTS campaigns (id INT NOT NULL AUTO_
                      deadline VARCHAR(50));`;
 
 const clearTable = 'TRUNCATE campaigns;';
-const writeData = `LOAD DATA INFILE '/var/lib/mysql-files/seedData.txt' INTO TABLE campaigns
+const writeData = `LOAD DATA LOCAL INFILE '${filePath}' INTO TABLE campaigns
                    COLUMNS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
                    (pledged, goal, backers, media, category, city, state, currency, country, deadline);`;
 
@@ -33,10 +36,10 @@ const countries = ['United States', 'United Kingdom', 'Canada', 'Australia', 'Ne
 
 const dateGen = () => moment(faker.date.future()).format('YYYY-MM-DD');
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 100; i += 1) {
   // assemble random comma-separated data strings
-  fakeRows += faker.fake(`{{commerce.price}},{{commerce.price}},{{random.number}},{{image.image}},`);
-  fakeRows += faker.fake(`{{commerce.product}},{{address.city}},{{address.stateAbbr}},`);
+  fakeRows += faker.fake('{{commerce.price}},{{commerce.price}},{{random.number}},{{image.image}},');
+  fakeRows += faker.fake('{{commerce.product}},{{address.city}},{{address.stateAbbr}},');
   // append data not handled by faker directly
   fakeRows += currCodes[Math.floor(Math.random() * currCodes.length)];
   fakeRows += ',';
@@ -46,7 +49,7 @@ for (let i = 0; i < 100; i++) {
   fakeRows += '\n'; // terminate each line with a newline
 }
 
-fs.writeFile('/var/lib/mysql-files/seedData.txt', fakeRows, (err) => { // write CSV
+fs.writeFile(filePath, fakeRows, (err) => { // write CSV
   if (err) {
     // eslint-disable-next-line no-console
     console.log(err);
@@ -59,7 +62,7 @@ db.connect((error) => {
     console.log(error);
   }
 });
-
-db.query(createDatabase + useDatabase + createTable + clearTable + writeData); // write mock data .csv into db
+// write mock data .csv into db
+db.query(createDatabase + useDatabase + createTable + clearTable + writeData);
 
 db.end();
