@@ -8,14 +8,14 @@ const useDatabase = 'USE funding_stats;';
 const createTable = `CREATE TABLE IF NOT EXISTS campaigns (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                      pledged DECIMAL(11, 2),
                      goal DECIMAL(11, 2),
-                     currency CHAR(3),
                      backers INT,
-                     deadline VARCHAR(50),
                      media VARCHAR(100),
                      category VARCHAR(20),
                      city VARCHAR(40),
                      state CHAR(2),
-                     country VARCHAR(40));`;
+                     currency CHAR(3),
+                     country VARCHAR(40),
+                     deadline VARCHAR(50));`;
 
 const clearTable = 'TRUNCATE campaigns;';
 const writeData = `LOAD DATA INFILE '/var/lib/mysql-files/seedData.txt' INTO TABLE campaigns
@@ -35,8 +35,8 @@ const dateGen = () => moment(faker.date.future()).format('YYYY-MM-DD');
 
 for (let i = 0; i < 100; i++) {
   // assemble random comma-separated data strings
-  fakeRows += faker.fake(`{{commerce.price}},{{commerce.price}},{{random.number}},{{image.image}},
-                          {{commerce.product}},{{address.city}},{{address.stateAbbr}},`);
+  fakeRows += faker.fake(`{{commerce.price}},{{commerce.price}},{{random.number}},{{image.image}},`);
+  fakeRows += faker.fake(`{{commerce.product}},{{address.city}},{{address.stateAbbr}},`);
   // append data not handled by faker directly
   fakeRows += currCodes[Math.floor(Math.random() * currCodes.length)];
   fakeRows += ',';
@@ -46,7 +46,7 @@ for (let i = 0; i < 100; i++) {
   fakeRows += '\n'; // terminate each line with a newline
 }
 
-fs.writeFile('/var/lib/mysql-files/seedData.csv', fakeRows, (err) => { // write CSV
+fs.writeFile('/var/lib/mysql-files/seedData.txt', fakeRows, (err) => { // write CSV
   if (err) {
     // eslint-disable-next-line no-console
     console.log(err);
