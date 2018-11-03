@@ -4,7 +4,7 @@ const db = require('../db/connection');
 
 const statsQuery = `USE funding_stats; SELECT pledged, goal, currency, backers, 
                     deadline, category, city, state, country FROM campaigns WHERE id = ?;`;
-const port = 3000;
+const port = 3002;
 const app = express();
 
 app.use(express.static(path.resolve(__dirname, '../../funding-widget/public')));
