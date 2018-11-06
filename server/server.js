@@ -12,7 +12,7 @@ app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/campaigns/:campaignId/stats', cors(), (req, res) => { // handle requests for a given campaign's stats
+app.get('/:campaignId', cors(), (req, res) => { // handle requests for a given campaign's stats
   const campaign = parseInt(req.params.campaignId, 10); // parse out the campaign's unique id
   db.query(statsQuery, [campaign], (error, results) => { // retrieve stats from the database
     if (error) {

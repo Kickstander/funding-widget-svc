@@ -25,10 +25,11 @@ class StatsTrack extends React.Component {
   }
 
   loadCampaignStats() {
-    const campaignId = 1 + Math.floor(Math.random() * 100); // random id 1-100
+    const currentUrl = window.location.href.split('/');
+    const campaignId = currentUrl[currentUrl.length - 1];
     const promise = new Promise((resolve) => {
       // ask the server to retrieve campaign data from db
-      $.get(`http://localhost:3002/campaigns/${campaignId}/stats`, (data) => {
+      $.get(`http://localhost:3002/${campaignId}`, (data) => {
         resolve(data);
       });
     });
