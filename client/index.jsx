@@ -11,7 +11,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className={style.app}>
+      <div className={style.statstrack}>
         <StatsTrack />
       </div>
     );
