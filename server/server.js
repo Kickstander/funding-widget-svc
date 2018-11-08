@@ -12,7 +12,7 @@ app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/:campaignId', cors(), (req, res) => { // handle requests for a given campaign's stats
+app.get('/:campaignId/stats', cors(), (req, res) => { // handle requests for a given campaign's stats
   const campaign = parseInt(req.params.campaignId, 10); // parse out the campaign's unique id
   db.query(statsQuery, [campaign], (error, results) => { // retrieve stats from the database
     if (error) {
@@ -21,6 +21,10 @@ app.get('/:campaignId', cors(), (req, res) => { // handle requests for a given c
     }
     res.status(200).send(results[1][0]);
   });
+});
+
+app.get('/:campaignId', (req, res) => { // handle requests for a given campaign's stats
+  res.status(200).sendFile(path.resolve(__dirname, '../public/index.html'));
 });
 
 app.listen(port, () => {

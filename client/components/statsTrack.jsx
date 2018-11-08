@@ -29,7 +29,7 @@ class StatsTrack extends React.Component {
     const campaignId = currentUrl[currentUrl.length - 1];
     const promise = new Promise((resolve) => {
       // ask the server to retrieve campaign data from db
-      $.get(`http://localhost:3002/${campaignId}`, (data) => {
+      $.get(`http://localhost:3002/${campaignId}/stats`, (data) => {
         resolve(data);
       });
     });
