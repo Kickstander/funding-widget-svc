@@ -54,9 +54,9 @@ npm run start
 
 | Action    | Method | Endpoint                                              | Purpose             |
 |-----------|--------|-------------------------------------------------------|---------------------|
-| Create    | POST   | /api/shoes/:shoeID/images                             | Insert new campaign |
+| Create    | POST   | /api/:campaignId/stats                                | Insert new campaign |
 | Read(One) | GET    | /api/:campaignId/stats                                | Get one campaign    |
-| Update    | PUT    | /api/shoes/:shoeID/images/:imageId                    | Update one campaign |
+| Update    | PUT    | /api/:campaignId/stats                                | Update one campaign |
 | Delete    | DELETE | /api/:campaignId/stats                                | Delete a campaign   |
 
 
