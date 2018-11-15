@@ -24,7 +24,8 @@
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 - Node 6.13.0
-- etc
+- mysql 
+- 
 
 ## Development
 
@@ -36,4 +37,26 @@ From within the root directory:
 npm install -g webpack
 npm install
 ```
+
+### Initial Startup
+
+1. Copy the contents of connection.test.js into a new file and name it connection.js
+ 
+
+```sh
+npm run seed
+mysql.server start THEN mysql -u root
+npm run build
+npm run start
+```
+
+### Endpoints
+
+| Action    | Method | Endpoint                                              | Purpose             |
+|-----------|--------|-------------------------------------------------------|---------------------|
+| Create    | POST   | /api/shoes/:shoeID/images                             | Insert new campaign |
+| Read(One) | GET    | /api/:campaignId/stats                                | Get one campaign    |
+| Update    | PUT    | /api/shoes/:shoeID/images/:imageId                    | Update one campaign |
+| Delete    | DELETE | /api/:campaignId/stats                                | Delete a campaign   |
+
 
