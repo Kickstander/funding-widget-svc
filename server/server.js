@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const db = require('../db/connection.js');
 
 
@@ -11,6 +12,7 @@ const app = express();
 
 app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
 
@@ -37,27 +39,26 @@ app.post('/:campaignId/stats', (req, res) => {
   res.end();
 });
 
-// app.put('/api/:campaignId/stats', (req, res) => {
-//   const id = req.params.campaignId;
-//   db.updateCampaign(id, req.body, (err, result) => {
-//     if (err) {
-//       res.send(err);
-//     } else {
-//       res.send(result);
-//     }
-//   });
-// });
+app.patch('/:campaignId/stats', (req, res) => {
+  const data = req.body;
+  db.Campaign.updateCampaign(data.id, data.pledged, data.goal, (err) => {
+    if (err) {
+      console.log(err);
+    }
+    res.end();
+  });
+});
 
-// app.delete('/api/:campaignId/stats', (req, res) => {
-//   const id = req.params.campaignId;
-//   db.deleteCampaign(id, (err, result) => {
-//     if (err) {
-//       res.send(err);
-//     } else {
-//       res.send(result);
-//     }
-//   });
-// });
+app.delete('/:campaignId/stats', (req, res) => {
+  const id = req.params.campaignId;
+  db.Campaign.deleteCampaign(id, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
 
 
 module.exports = app;
