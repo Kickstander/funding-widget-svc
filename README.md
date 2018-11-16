@@ -25,7 +25,6 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 - Node 6.13.0
 - mysql 
-- 
 
 ## Development
 
@@ -57,7 +56,7 @@ npm run start
 |-----------|--------|-------------------------------------------------------|---------------------|
 | Create    | POST   | /api/:campaignId/stats                                | Insert new campaign |
 | Read(One) | GET    | /api/:campaignId/stats                                | Get one campaign    |
-| Update    | PUT    | /api/:campaignId/stats                                | Update one campaign |
+| Update    | PATCH    | /api/:campaignId/stats                              | Update one campaign |
 | Delete    | DELETE | /api/:campaignId/stats                                | Delete a campaign   |
 
 
