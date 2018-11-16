@@ -8,7 +8,8 @@ const filePath = Path.resolve(__dirname, './seedData.csv');
 // a series of query strings to send the database
 const createDatabase = 'CREATE DATABASE IF NOT EXISTS funding_stats;';
 const useDatabase = 'USE funding_stats;';
-const createTable = `CREATE TABLE IF NOT EXISTS campaigns (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+const createTable = `CREATE TABLE IF NOT EXISTS campaigns (
+                     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                      pledged DECIMAL(11, 2),
                      goal DECIMAL(11, 2),
                      backers INT,
@@ -18,7 +19,8 @@ const createTable = `CREATE TABLE IF NOT EXISTS campaigns (id INT NOT NULL AUTO_
                      state CHAR(2),
                      currency CHAR(3),
                      country VARCHAR(40),
-                     deadline VARCHAR(50));`;
+                     deadline VARCHAR(50)
+                     );`;
 
 const clearTable = 'TRUNCATE campaigns;';
 const writeData = `LOAD DATA LOCAL INFILE '${filePath}' INTO TABLE campaigns

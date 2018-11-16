@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "npx webpack -w",
-    "server-dev": "nodemon server/server.js",
+    "server-dev": "nodemon server/index.js",
     "seed": "node db/seed.js",
     "test": "jest --coverage"
   },
@@ -23,6 +23,7 @@
     "acorn": "^6.0.2",
     "ajv": "^6.5.5",
     "bluebird": "^3.5.2",
+    "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "css-loader": "^1.0.1",
     "express": "^4.16.4",
