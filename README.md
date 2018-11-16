@@ -44,8 +44,9 @@ npm install
  
 
 ```sh
+mysql.server start
+mysql -u root 
 npm run seed
-mysql.server start THEN mysql -u root
 npm run build
 npm run start
 ```
