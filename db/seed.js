@@ -9,7 +9,7 @@ const filePath = Path.resolve(__dirname, './seedData.csv');
 const createDatabase = 'CREATE DATABASE IF NOT EXISTS funding_stats;';
 const useDatabase = 'USE funding_stats;';
 const createTable = `CREATE TABLE IF NOT EXISTS campaigns (
-                     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                     id SERIAL PRIMARY KEY,
                      pledged DECIMAL(11, 2),
                      goal DECIMAL(11, 2),
                      backers INT,
