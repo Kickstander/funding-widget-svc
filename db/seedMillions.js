@@ -17,8 +17,8 @@ const seedPrimaryData = function seedPrimaryData() {
 
     for (let j = 0; j < campaigns; j += 1) {
       const name = faker.commerce.productName();
-      const pledgedAmount = Math.floor(Math.random() * goal) + 100000;
       const goal = Math.floor(Math.random() * 100000) + 50000;
+      const pledgedAmount = Math.floor(Math.random() * goal) + 100000;
       const backers = Math.floor(Math.random() * 500);
       const endTime = startTime + Math.floor(Math.random() * 90 + 15) * 86400;
 
@@ -29,13 +29,13 @@ const seedPrimaryData = function seedPrimaryData() {
   console.log(`${dataLimit} in ${new Date().getTime() - currentTime} milliseconds`);
 
   currentTime = new Date().getTime();
-  return fs.writeFile('./seedLargeData.csv', data.join('\n') 
+  return fs.writeFile('./seedLargeData.csv', data.join('\n'), { flag: 'a' }) 
     .then((result) => {
       console.log('seed primary data successful');
     })
     .catch((error) => { 
       console.log(error) 
-    }));
+    });
 };
 
 const seedPledgeData = function seedPledgeData(i) {

@@ -25,4 +25,7 @@ public/bundle.js
 
 
 db/connection.js
+*.csv
 db/seedData.csv
+db/seedLargeData.csv
+db/pledgeData.csv
