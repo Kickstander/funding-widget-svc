@@ -1,7 +1,7 @@
 const fs = require('fs.promises');
 const path = require('path');
 const faker = require('faker');
-const db = require('../index.js');
+const db = require('../db_postgres/index.js');
 const dataLimit = 10 * 100000;
 const campaigns = 100;
 const startTime = 1543622400; //DEC 1, 2018 AT 00:00:00
