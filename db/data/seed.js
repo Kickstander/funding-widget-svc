@@ -2,7 +2,7 @@ const fs = require('fs');
 const faker = require('faker');
 const Path = require('path');
 const moment = require('moment');
-const db = require('./connection.js');
+const db = require('../connection.js');
 
 const filePath = Path.resolve(__dirname, './seedData.csv');
 // a series of query strings to send the database
