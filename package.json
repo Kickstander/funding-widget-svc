@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "kickstander",
   "version": "",
   "description": "",
   "author": "",
@@ -9,8 +9,8 @@
   },
   "scripts": {
     "build": "npx webpack -w",
-    "start": "nodemon server/index.js",
-    "seed": "node db/seedLargeData.js",
+    "start": "nodemon server/server.js",
+    "seed": "node db/data/seedCampaignData.js",
     "test": "jest --coverage"
   },
   "jest": {
@@ -34,6 +34,7 @@
     "fs": "0.0.1-security",
     "fs.promises": "^0.1.2",
     "jquery": "^3.2.1",
+    "k6": "0.0.0",
     "moment": "^2.22.2",
     "mysql": "^2.16.0",
     "newrelic": "^4.11.0",

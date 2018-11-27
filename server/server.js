@@ -1,64 +1,118 @@
-const path = require('path');
+require('newrelic');
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
-const db = require('../db/connection.js');
-
-
-const statsQuery = `USE funding_stats; SELECT pledged, goal, currency, backers, 
-                    deadline, category, city, state, country FROM campaigns WHERE id = ?;`;
+const path = require('path');
+const Models = require('../db/models/models.js');
+const db = require('../db/db_postgres');
 
 const app = express();
+const port = 3002;
 
 app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(express.json());
-app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 
+const allowCORS = function (res) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+};
 
-app.get('/:campaignId/stats', cors(), (req, res) => { // handle requests for a given campaign's stats
-  const campaign = parseInt(req.params.campaignId, 10); // parse out the campaign's unique id
-  db.query(statsQuery, [campaign], (error, results) => { // retrieve stats from the database
-    if (error) {
-      res.status(404).send(error);
-      return;
-    }
-    res.status(200).send(results[1][0]);
-  });
+app.get('/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-app.get('/:campaignId', (req, res) => { // handle requests for a given campaign's stats
-  res.status(200).sendFile(path.resolve(__dirname, '../public/index.html'));
+app.post('/new/stats', (req, res) => {
+  allowCORS(res);
+  Models.addCampaign(db, req.body)
+    .then((result) => {
+      res.status(201).type('application/json');
+      res.send(JSON.stringify(result));
+    }).catch((error) => {
+      res.send(500);
+    });
 });
 
-app.post('/:campaignId/stats', (req, res) => {
-  const data = req.body;
-  db.Campaign.addCampaign(data.id, data.pledged, data.goal,
-    data.backers, data.media, data.category, data.city,
-    data.state, data.currency, data.country, data.deadline);
-  res.end();
+app.get('/:campaign/stats', (req, res) => {
+  allowCORS(res);
+  const campaign = Number.parseInt(req.params.campaign, 10);
+  if (Number.isNaN(campaign)) {
+    res.status(400).type('application/json');
+    res.send(JSON.stringify({ success: false, error: 'Campaign is not a number' }));
+  } else {
+    Models.getCampaignById(db, campaign)
+      .then((result) => {
+        res.status(200).type('application/json');
+        res.send(JSON.stringify(result));
+      }).catch((error) => {
+        res.send(500);
+      });
+  }
 });
 
-app.patch('/:campaignId/stats', (req, res) => {
-  const data = req.body;
-  db.Campaign.updateCampaign(data.id, data.pledged, data.goal, (err) => {
-    if (err) {
-      console.log(err);
-    }
-    res.end();
-  });
+app.get('/:user/campaigns', (req, res) => {
+  allowCORS(res);
+  Models.getCampaignsByUser(db, req.params.user)
+    .then((result) => {
+      res.status(200).type('application/json');
+      res.send(JSON.stringify(result));
+    }).catch((error) => {
+      res.send(500);
+    });
 });
 
-app.delete('/:campaignId/stats', (req, res) => {
-  const id = req.params.campaignId;
-  db.Campaign.deleteCampaign(id, (err, result) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(result);
-    }
-  });
+app.patch('/:campaign/stats', (req, res) => {
+  allowCORS(res);
+  const campaign = Number.parseInt(req.params.campaign, 10);
+  if (Number.isNaN(campaign)) {
+    res.status(400).type('application/json');
+    res.send(JSON.stringify({ success: false, error: 'Campaign is not a number' }));
+  } else {
+    Models.pledgeCampaign(db, campaign, req.body)
+      .then((result) => {
+        res.status(200).type('application/json');
+        res.send(JSON.stringify(result));
+      }).catch((error) => {
+        res.send(500);
+      });
+  }
 });
 
+app.put('/:campaign/stats', (req, res) => {
+  allowCORS(res);
+  const campaign = Number.parseInt(req.params.campaign, 10);
+  if (Number.isNaN(campaign)) {
+    res.status(400).type('application/json');
+    res.send(JSON.stringify({ success: false, error: 'Campaign is not a number' }));
+  } else {
+    Models.updateCampaign(db, campaign, req.body)
+      .then((result) => {
+        res.status(200).type('application/json');
+        res.send(JSON.stringify(result));
+      }).catch((error) => {
+        res.send(500);
+      });
+  }
+});
 
-module.exports = app;
+app.delete('/:campaign/stats', (req, res) => {
+  allowCORS(res);
+  const campaign = Number.parseInt(req.params.campaign, 10);
+
+  if (Number.isNaN(campaign)) {
+    res.status(400).type('application/json');
+    res.send(JSON.stringify({ success: false, error: 'Campaign is not a number' }));
+  } else {
+    Models.deleteCampaign(db, campaign)
+      .then((result) => {
+        res.status(200).type('application/json');
+        res.send(JSON.stringify(result));
+      })
+      .catch((error) => {
+        res.send(500);
+      });
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Listening on port: ${port}`);
+});
