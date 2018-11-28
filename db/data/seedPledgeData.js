@@ -1,22 +1,22 @@
 const fs = require('fs.promises');
 const faker = require('faker');
-const db = require('../index.js');
+const db = require('../db_postgres/index.js');
 const dataLimit = 10 * 100000;
 const startTime = 1543622400; //DEC 1, 2018 AT 00:00:00
 let currentTime = new Date().getTime();
 
 const seedPledgeData = function seedPledgeData(i) {
-  const data = ['name,pledgedAmount,pledgeTime,campaignID'];
+  const data = ['name,pledge,pledgeTime,campaignId'];
   const campaignLimit = dataLimit / 100;
   const first = campaignLimit * i;
   const last = campaignLimit * (i + 1);
 
   for (let k = first; k < last; k += 1) {
     for (let j = 0; j < 50; j += 1) {
-      const pledgedAmount = Math.floor(Math.random() * 100) + 1;
+      const pledge = Math.floor(Math.random() * 100) + 1;
       const pledgeTime = startTime + Math.floor(Math.random() * 90) * 86400;
 
-      data.push(`${faker.name.findName()},${pledgedAmount},${pledgeTime}`);
+      data.push(`${faker.name.findName()},${pledge},${pledgeTime},${k}`);
     }
   }
   data.push('');
@@ -32,9 +32,9 @@ const seedPledgeData = function seedPledgeData(i) {
     });
 };
 
-async function writeAndSeed() {
+function writeAndSeed() {
   for (let i = 0; i < 100; i++) {
-    await seedPledgeData(i);
+    seedPledgeData(i);
   }
 };
 

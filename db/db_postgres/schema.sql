@@ -9,3 +9,10 @@ CREATE TABLE IF NOT EXISTS campaigns (
   backers INT NOT NULL, 
   endTime INT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS pledges (
+  name TEXT NOT NULL,
+  pledgedAmount INT NOT NULL,
+  pledgeTime INT NOT NULL,
+  campaignId INT REFERENCES campaigns (id),
+)

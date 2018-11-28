@@ -6,7 +6,7 @@ DELIMITER ',' CSV;
 
 
 
-COPY pledges (name, pledgedAmount, pledgeTime, campaignID) 
+COPY pledges(name, pledgedAmount, pledgeTime, campaignId) 
 FROM '/Users/seanghazvini/HRSF105/SDC/funding-widget-svc/db/data/seedPledgeData.csv'
 DELIMITER ',' CSV; 
 
