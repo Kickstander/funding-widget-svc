@@ -1,7 +1,7 @@
 const fs = require('fs.promises');
 const faker = require('faker');
 const db = require('../db_postgres/index.js');
-const dataLimit = 10 * 100000;
+const dataLimit = 100000;
 const startTime = 1543622400; //DEC 1, 2018 AT 00:00:00
 let currentTime = new Date().getTime();
 
@@ -20,12 +20,12 @@ const seedPledgeData = function seedPledgeData(i) {
     }
   }
   data.push('');
-  console.log(`PLEDGED DATA SEEDING: ${campaignLimit * 50} in ${new Date().getTime() - currentTime} milliseconds`);
+  console.log(`PLEDGE DATA: ${campaignLimit * 50} in ${new Date().getTime() - currentTime} milliseconds`);
 
   currentTime = new Date().getTime();
-  return fs.writeFile(`./pledgeData.csv`, data.join('\n'))
+  return fs.writeFile(`./pledgeData.csv`, data.join('\n'), { flag: 'a' })
     .then((result) => {
-      console.log('seed pledge data successful');
+      console.log(`WROTE: ${campaignLimit * 50} entries in ${new Date().getTime() - currentTime} ms`);
     })
     .catch((error) => { 
       console.log(error) 
