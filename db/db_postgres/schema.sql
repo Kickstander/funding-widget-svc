@@ -1,18 +1,21 @@
-CREATE TABLE IF NOT EXISTS campaigns (
+CREATE TABLE campaigns (
   id SERIAL PRIMARY KEY, 
   campaign TEXT NOT NULL, 
+  description TEXT NOT NULL,
   author TEXT NOT NULL, 
-  user TEXT NOT NULL, 
+  _user TEXT NOT NULL, 
   country INT NOT NULL, 
-  pledgedAmount INT NOT NULL,
+  pledged INT NOT NULL,
   goal INT NOT NULL, 
   backers INT NOT NULL, 
-  endTime INT NOT NULL
+  endDate INT NOT NULL,
+  _type INT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS pledges (
+CREATE TABLE pledges (
   name TEXT NOT NULL,
-  pledgedAmount INT NOT NULL,
-  pledgeTime INT NOT NULL,
-  campaignId INT REFERENCES campaigns (id),
-)
+  pledge INT NOT NULL,
+  pledgeTime BIGINT NOT NULL,
+  campaignId INT NOT NULL
+);
+

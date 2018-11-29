@@ -8,7 +8,7 @@ const startTime = 1543622400; //DEC 1, 2018 AT 00:00:00
 
 
 const seedCampaignData = function seedCampaignData() {
-  const data = ['campaign,description,author,user,country,pledged,goal,backers,endDate,_type'];
+  const data = [];
   for (let i = 0; i < dataLimit / campaigns; i += 1) {
     const author = `${faker.name.firstName()} ${faker.name.lastName()}`;
     const user = `${faker.name.firstName()} ${Math.floor(Math.random() * 1000)}`;
@@ -30,7 +30,7 @@ const seedCampaignData = function seedCampaignData() {
   data.push('');
 
   currentTime = new Date().getTime();
-  return fs.writeFile('./seedCampaignsData.csv', data.join('\n'), { 'flag': 'a' }) 
+  return fs.writeFile('./campaignData.csv', data.join('\n'), { 'flag': 'a' }) 
     .then((result) => {
       console.log(`CAMPAIGN DATA: ${dataLimit} entries in ${new Date().getTime() - startTime} ms`);
     })
