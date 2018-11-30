@@ -8,7 +8,7 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "build": "npx webpack -w",
+    "build": "webpack -w",
     "start": "nodemon server/server.js",
     "seed": "node db/data/seedCampaignData.js",
     "test": "jest --coverage"

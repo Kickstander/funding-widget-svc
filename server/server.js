@@ -5,7 +5,7 @@ const Models = require('../db/models/models.js');
 const db = require('../db/db_postgres');
 
 const app = express();
-const port = 3002;
+const port = 3003;
 
 app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(express.json());
@@ -31,9 +31,9 @@ app.post('/new/stats', (req, res) => {
     });
 });
 
-app.get('/:campaign/stats', (req, res) => {
+app.get('/:campaignId/stats', (req, res) => {
   allowCORS(res);
-  const campaign = Number.parseInt(req.params.campaign, 10);
+  const campaign = Number.parseInt(req.params.campaignId);
   if (Number.isNaN(campaign)) {
     res.status(400).type('application/json');
     res.send(JSON.stringify({ success: false, error: 'Campaign is not a number' }));
@@ -115,3 +115,12 @@ app.delete('/:campaign/stats', (req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
 });
+
+
+client.connect()
+  .then((result) => {
+    console.log('connection succeeded:', result);
+  })
+  .catch((error) => {
+    console.log('connection error:', error);
+  });
